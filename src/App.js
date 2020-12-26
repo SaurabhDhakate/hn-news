@@ -21,7 +21,8 @@ export class App extends Component {
       tags: '',
       query: '',
       range: '',
-      page: 0
+      page: 0,
+      totalPage:null
     }
   }
 
@@ -67,7 +68,8 @@ export class App extends Component {
         this.setState({
           news: data.hits,
           nbHits: data.nbHits,
-          nbTime:data.processingTimeMS
+          nbTime:data.processingTimeMS,
+          totalPage:data.nbPages
         })
       })
   }
@@ -86,7 +88,7 @@ export class App extends Component {
           nbHits={this.state.nbHits}
           nbTime={this.state.nbTime} />
         <NewsBox news={this.state.news} />
-        <Pagination page={this.updatePage} />
+        <Pagination page={this.updatePage} totalPage={this.state.totalPage} />
       </div>
     )
   }

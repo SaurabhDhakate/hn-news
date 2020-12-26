@@ -4,7 +4,7 @@ export class Pagination extends Component {
     createoptions(n) {
         let options = []
         for (let i = 0; i < n; i++) {
-            options.push(<option>{i}</option>)
+            options.push(<option key={i}>{i}</option>)
         }
         return options
     }
@@ -13,11 +13,12 @@ export class Pagination extends Component {
             <div style={{
                 display: 'flex',
                 width: '100%',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                margin:'10px 0'
             }}>
                 <label for='page' style={{marginRight:'10px'}}>Page</label>
                 <select name="page" id="page" onChange={event => this.props.page(event.target.value)}>
-                    {this.createoptions(35).map(opt=>opt)}
+                    {this.createoptions(this.props.totalPage).map(opt=>opt)}
                 </select>
             </div>
         )

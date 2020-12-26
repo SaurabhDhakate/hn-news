@@ -35,6 +35,14 @@ body {
     margin-left: 20px;
 }
 
+.header a img {
+    height: 100%;
+}
+
+.header a {
+    height: 80%;
+}
+
 .searchBox {
     width: 70%;
     height: 70%;
@@ -85,17 +93,21 @@ h6 {
     font-weight: 500;
 }
 
-a {
+.news a {
     color: gray;
     text-decoration: none;
     font-weight: 400;
 }
 
-a::after {
+a {
+    overflow: hidden;
+}
+
+.news a::after {
     content: ')';
 }
 
-a::before {
+.news a::before {
     content: '(';
 }
 
@@ -134,7 +146,7 @@ option {
     padding: 10px;
 }
 
-@media(max-width:480px) {
+@media(max-width:600px) {
     .header h3 {
         display: none;
     }
@@ -160,6 +172,9 @@ option {
     .filter-box select {
         margin-left: 10px;
         margin-right: 10px;
+    }
+    .filter-box h6{
+        display: none;
     }
     .header img {
         margin: 0 5px;
