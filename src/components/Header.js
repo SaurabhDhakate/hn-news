@@ -9,10 +9,10 @@ export class Header extends Component {
                 <div className="searchBox">
                     <div><img src="https://www.flaticon.com/svg/static/icons/svg/49/49116.svg" height="20px" alt=''></img></div>
                     <input type="text" placeholder='Search stories by title, url or author' onChange={event=>(this.props.query(event.target.value))}></input>
-                    <div className='searchBy'>Search by</div>
+                    <div className='searchBy'>Search by <img src='https://hn.algolia.com/packs/media/images/logo-algolia-blue-35c461b6.svg'></img></div>
                 </div>
                 <div className='setting'>
-                    <img src='https://www.flaticon.com/svg/static/icons/svg/2099/2099058.svg' height='20px' alt=''></img>
+                    <img src='https://www.flaticon.com/svg/static/icons/svg/2099/2099058.svg' height='20px' alt='' ></img>
                 </div>
             </header>
         )

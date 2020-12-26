@@ -16,14 +16,15 @@ export class FilterBox extends Component {
                     <option value="search_by_date">Date</option>
                 </select>
                 <label for='for'> for</label>
-                <select name="for" id="for">
-                    <option value="All time">All time</option>
-                    <option value="Last 24 hr">Last 24 hr</option>
-                    <option value="Past Week">Past Week</option>
-                    <option value="Past Month">Past Month</option>
-                    <option value="Past Year">Past Year</option>
-                    <option value="Custom Range">Custom Range</option>
+                <select name="for" id="for" onChange={event => this.props.range(event.target.value)}>
+                    <option value="">All time</option>
+                    <option value={'created_at_i%3E'+24 * 60 * 60}>Last 24 hr</option>
+                    <option value={'created_at_i%3E'+7 * 24 * 60 * 60}>Past Week</option>
+                    <option value={'created_at_i%3E'+30 * 24 * 60 * 60}>Past Month</option>
+                    <option value={'created_at_i%3E'+365 * 24 * 60 * 60}>Past Year</option>
+                    <option value="">Custom Range</option>
                 </select>
+                <h6 style={{float:'right'}}>{this.props.nbHits} results {this.props.nbTime / 1000} secs</h6>
             </div>
         )
     }

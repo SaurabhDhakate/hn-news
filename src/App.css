@@ -1,3 +1,7 @@
+body {
+    background-color: #f6f6ef;
+}
+
 .header {
     background-color: #ff742b;
     height: 56px;
@@ -14,6 +18,12 @@
 .searchBy {
     font-size: small;
     color: gray;
+    display: flex;
+}
+
+.searchBy img {
+    width: 50px;
+    margin-left: 20px;
 }
 
 .header input {
@@ -41,9 +51,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 }
 
-.setting::after{
+.setting::after {
     content: 'Settings';
     margin-left: 10px;
 }
@@ -55,7 +66,7 @@
     padding: 10px 0px;
 }
 
-.news{
+.news {
     margin-bottom: 20px;
 }
 
@@ -64,7 +75,7 @@
     font-weight: 400;
 }
 
-br{
+br {
     display: none;
 }
 
@@ -74,17 +85,17 @@ h6 {
     font-weight: 500;
 }
 
-a{
+a {
     color: gray;
     text-decoration: none;
-    font-weight:400;
+    font-weight: 400;
 }
 
-a::after{
+a::after {
     content: ')';
 }
 
-a::before{
+a::before {
     content: '(';
 }
 
@@ -92,74 +103,74 @@ a:hover {
     text-decoration: underline;
 }
 
-.news-story{
+.news-story {
     margin: 0 20px;
-    font-size:small;
+    font-size: small;
 }
 
-.filter-box{
+.filter-box {
     padding: 5px 5px;
     background-color: #f6f6ef;
 }
 
-.filter-box label{
+.filter-box label {
     margin: 0 5px;
     font-size: small;
 }
 
-select{
+select {
     height: 25px;
     background-color: #f6f6ef;
     color: grey;
     outline: none;
 }
 
-.news-title{
+.news-title {
     display: flex;
     flex-wrap: wrap;
 }
 
-option{
+option {
     padding: 10px;
 }
 
-@media(max-width:480px){
-    .header h3{
+@media(max-width:480px) {
+    .header h3 {
         display: none;
     }
-    .setting::after{
+    .setting::after {
         content: '';
     }
-    .setting{
+    .setting {
         margin-right: unset;
     }
-    .header{
+    .header {
         justify-content: space-between;
     }
-    .searchBy{
+    .searchBy {
         display: none;
     }
-    .filter-box label{
+    .filter-box label {
         display: none;
     }
-    .filter-box{
+    .filter-box {
         display: flex;
         justify-content: flex-end;
     }
-    .filter-box select{
+    .filter-box select {
         margin-left: 10px;
         margin-right: 10px;
     }
-    .header img{
+    .header img {
         margin: 0 5px;
     }
-    .news h5{
+    .news h5 {
         width: 100%;
     }
-    .news{
+    .news {
         margin-bottom: 5px;
     }
-    *{
+    * {
         overflow-x: hidden;
     }
 }
