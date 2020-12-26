@@ -22,7 +22,7 @@ export class App extends Component {
       query: '',
       range: '',
       page: 0,
-      totalPage:null
+      totalPage:null,
     }
   }
 
@@ -70,6 +70,12 @@ export class App extends Component {
           nbHits: data.nbHits,
           nbTime:data.processingTimeMS,
           totalPage:data.nbPages
+        })
+      })
+      .catch(()=>{
+        this.setState({
+          news:[],
+          totalPage:false
         })
       })
   }
