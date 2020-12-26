@@ -9,7 +9,7 @@ export class NewsBox extends Component {
                 return(<h1 style={{textAlign:'center'}}>No News Found</h1>)
             }
             if(this.props.news.length === 0 && this.props.loading === true){
-                return(<h1 style={{textAlign:'center'}}>Loading ... </h1>)
+                return(<h1 style={{textAlign:'center'}}><span className='loader'></span>Loading</h1>)
             }
         }
         return (
