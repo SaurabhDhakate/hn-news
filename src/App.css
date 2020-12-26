@@ -159,8 +159,14 @@ option {
     .header {
         justify-content: space-between;
     }
+    .header input{
+        margin-left: unset;
+    }
     .searchBy {
         display: none;
+    }
+    .searchBox {
+        padding: 0 5px;
     }
     .filter-box label {
         display: none;
