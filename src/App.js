@@ -23,6 +23,7 @@ export class App extends Component {
       range: '',
       page: 0,
       totalPage:null,
+      loading:false,
     }
   }
 
@@ -61,6 +62,9 @@ export class App extends Component {
   }
 
   updateNews(tag, query, sort, range, page) {
+    this.setState({
+      loading:true
+    })
     fetch(`https://hn.algolia.com/api/v1/${sort}?query=${query}&tags=${tag}&numericFilters=${range}&page=${page}`)
       .then(data => data.json())
       .then(data => {
@@ -69,13 +73,15 @@ export class App extends Component {
           news: data.hits,
           nbHits: data.nbHits,
           nbTime:data.processingTimeMS,
-          totalPage:data.nbPages
+          totalPage:data.nbPages,
+          loading:false
         })
       })
       .catch(()=>{
         this.setState({
           news:[],
-          totalPage:false
+          totalPage:false,
+          loading:false
         })
       })
   }
@@ -93,7 +99,7 @@ export class App extends Component {
           range={this.updateRange}
           nbHits={this.state.nbHits}
           nbTime={this.state.nbTime} />
-        <NewsBox news={this.state.news} />
+        <NewsBox news={this.state.news} loading = {this.state.loading}/>
         <Pagination page={this.updatePage} totalPage={this.state.totalPage} />
       </div>
     )

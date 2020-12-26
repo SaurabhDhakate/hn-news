@@ -5,8 +5,11 @@ export class NewsBox extends Component {
 
     render() {
         let errMsg = () =>{
-            if(this.props.news.length === 0){
+            if(this.props.news.length === 0 && this.props.loading === false){
                 return(<h1 style={{textAlign:'center'}}>No News Found</h1>)
+            }
+            if(this.props.news.length === 0 && this.props.loading === true){
+                return(<h1 style={{textAlign:'center'}}>Loading ... </h1>)
             }
         }
         return (
