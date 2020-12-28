@@ -15,17 +15,6 @@ body {
     font-size: medium;
 }
 
-.searchBy {
-    font-size: small;
-    color: gray;
-    display: flex;
-}
-
-.searchBy img {
-    width: 50px;
-    margin-left: 20px;
-}
-
 .header input {
     outline: none;
     border: none;
@@ -196,7 +185,7 @@ option {
     text-align: right;
 }
 
-.settings-input{
+.settings-input {
     width: 50%;
 }
 
@@ -224,9 +213,6 @@ option {
     }
     .header input {
         margin-left: unset;
-    }
-    .searchBy {
-        display: none;
     }
     .searchBox {
         padding: 0 5px;

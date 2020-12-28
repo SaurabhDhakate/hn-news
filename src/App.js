@@ -3,9 +3,11 @@ import Header from './components/Header';
 import NewsBox from './components/NewsBox';
 import FilterBox from './components/FilterBox';
 import Pagination from './components/Pagination';
-import './App.css';
 import { BrowserRouter, Route } from "react-router-dom";
 import Setting from './components/Setting';
+import Axios from 'axios';
+import './App.css';
+
 
 export class App extends Component {
   constructor(props) {
@@ -67,19 +69,19 @@ export class App extends Component {
     this.setState({
       loading: true
     })
-    fetch(`https://hn.algolia.com/api/v1/${sort}?query=${query}&tags=${tag}&numericFilters=${range}&page=${page}`)
-      .then(data => data.json())
-      .then(data => {
-        console.log(data, `https://hn.algolia.com/api/v1/${sort}?query=${query}&tags=${tag}&numericFilters=${range}&page=${page}`)
+    Axios.get(`https://hn.algolia.com/api/v1/${sort}?query=${query}&tags=${tag}&numericFilters=${range}&page=${page}`)
+      .then(response => {
+        console.log(response, `https://hn.algolia.com/api/v1/${sort}?query=${query}&tags=${tag}&numericFilters=${range}&page=${page}`)
         this.setState({
-          news: data.hits,
-          nbHits: data.nbHits,
-          nbTime: data.processingTimeMS,
-          totalPage: data.nbPages,
+          news: response.data.hits,
+          nbHits: response.data.nbHits,
+          nbTime: response.data.processingTimeMS,
+          totalPage: response.data.nbPages,
           loading: false
         })
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err)
         this.setState({
           news: [],
           totalPage: false,
