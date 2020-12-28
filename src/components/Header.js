@@ -13,7 +13,7 @@ export class Header extends Component {
                     <input type="text" placeholder='Search stories by title, url or author' onChange={event => (this.props.query(event.target.value))}></input>
                     <div className='searchBy'>Search by <img src='https://hn.algolia.com/packs/media/images/logo-algolia-blue-35c461b6.svg'></img></div>
                 </div>
-                <a href='./setting.html' style={{
+                <a href='./setting' style={{
                     marginLeft: 'auto',
                     textDecoration: 'none',
                     color: 'black',

@@ -1,9 +1,11 @@
-import './App.css';
 import React, { Component } from 'react'
 import Header from './components/Header';
 import NewsBox from './components/NewsBox';
 import FilterBox from './components/FilterBox';
 import Pagination from './components/Pagination';
+import './App.css';
+import { BrowserRouter, Route } from "react-router-dom";
+import Setting from './components/Setting';
 
 export class App extends Component {
   constructor(props) {
@@ -16,14 +18,14 @@ export class App extends Component {
     this.state = {
       news: [],
       nbHits: '',
-      nbTime:null,
+      nbTime: null,
       sort: 'search',
       tags: '',
       query: '',
       range: '',
       page: 0,
-      totalPage:null,
-      loading:false,
+      totalPage: null,
+      loading: false,
     }
   }
 
@@ -63,7 +65,7 @@ export class App extends Component {
 
   updateNews(tag, query, sort, range, page) {
     this.setState({
-      loading:true
+      loading: true
     })
     fetch(`https://hn.algolia.com/api/v1/${sort}?query=${query}&tags=${tag}&numericFilters=${range}&page=${page}`)
       .then(data => data.json())
@@ -72,16 +74,16 @@ export class App extends Component {
         this.setState({
           news: data.hits,
           nbHits: data.nbHits,
-          nbTime:data.processingTimeMS,
-          totalPage:data.nbPages,
-          loading:false
+          nbTime: data.processingTimeMS,
+          totalPage: data.nbPages,
+          loading: false
         })
       })
-      .catch(()=>{
+      .catch(() => {
         this.setState({
-          news:[],
-          totalPage:false,
-          loading:false
+          news: [],
+          totalPage: false,
+          loading: false
         })
       })
   }
@@ -92,16 +94,26 @@ export class App extends Component {
 
   render() {
     return (
-      <div>
-        <Header query={this.updateQuery} />
-        <FilterBox tags={this.updateFilter}
-          sort={this.updateSort}
-          range={this.updateRange}
-          nbHits={this.state.nbHits}
-          nbTime={this.state.nbTime} />
-        <NewsBox news={this.state.news} loading = {this.state.loading}/>
-        <Pagination page={this.updatePage} totalPage={this.state.totalPage} />
-      </div>
+      <BrowserRouter>
+
+        <Route path='/' exact>
+          <div>
+            <Header query={this.updateQuery} />
+            <FilterBox tags={this.updateFilter}
+              sort={this.updateSort}
+              range={this.updateRange}
+              nbHits={this.state.nbHits}
+              nbTime={this.state.nbTime} />
+            <NewsBox news={this.state.news} loading={this.state.loading} />
+            <Pagination page={this.updatePage} totalPage={this.state.totalPage} />
+          </div>
+        </Route>
+
+        <Route path='/setting' exact>
+          <Setting />
+        </Route>
+
+      </BrowserRouter>
     )
   }
 }

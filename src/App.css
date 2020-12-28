@@ -50,6 +50,7 @@ body {
     display: flex;
     align-items: center;
     padding: 0 15px;
+    margin-left: auto;
 }
 
 .setting {
@@ -64,6 +65,11 @@ body {
 
 .setting::after {
     content: 'Settings';
+    margin-left: 10px;
+}
+
+.home::after {
+    content: ' Back';
     margin-left: 10px;
 }
 
@@ -174,6 +180,24 @@ option {
     border-radius: 50%;
     border: 7.5px solid;
     border-color: #ff742b transparent;
+}
+
+.setting-row {
+    align-items: center;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.setting-row label {
+    width: 50%;
+    margin-right: 25px;
+    text-align: right;
+}
+
+.settings-input{
+    width: 50%;
 }
 
 @keyframes rotation {
