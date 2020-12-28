@@ -19,6 +19,7 @@ body {
     font-size: small;
     color: gray;
     display: flex;
+    margin-left: auto;
 }
 
 .searchBy img {
