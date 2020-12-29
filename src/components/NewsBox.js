@@ -15,8 +15,8 @@ function NewsBox(props) {
     return (
         <div className='news-box'>
             {errMsg()}
-            {props.news.filter(news => (news.title || news.comment_text)).map(news => {
-                return <News key={news.title} news={news} />
+            {props.news.filter(news => (news.title || news.comment_text)).map((news,index) => {
+                return <News key={index} news={news} />
             })}
         </div>
     )

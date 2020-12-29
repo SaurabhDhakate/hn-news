@@ -34,32 +34,37 @@ export class App extends Component {
   updateFilter(tags) {
     this.setState({
       tags: tags,
-    }, () => this.updateNews())
+    }, () => { this.updateNews() })
   }
 
   updateQuery(query) {
     this.setState({
       query: query,
-    })
+    }, () => { this.updateNews() })
   }
 
   updateSort(sort) {
     this.setState({
       sort: sort
-    }, () => this.updateNews())
+    }, () => { this.updateNews() })
   }
 
   updatePage(page) {
     this.setState({
       page: page
-    }, () => this.updateNews())
+    }, () => { this.updateNews() })
   }
 
   updateRange(range) {
     this.setState({
       range: range,
       sort: 'search_by_date'
-    }, () => this.updateNews())
+    }, () => {
+      this.updateNews()
+      this.setState({
+        sort: 'search'
+      })
+    })
   }
 
   updateNews() {
