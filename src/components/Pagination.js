@@ -1,34 +1,33 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export class Pagination extends Component {
-    createoptions(n) {
+function Pagination(props) {
+    let createoptions = (n) => {
         let options = []
         for (let i = 0; i < n; i++) {
-            options.push(<option key={i}>{i+1}</option>)
+            options.push(<option key={i}>{i + 1}</option>)
         }
         return options
     }
-    render() {
-        let pagination = () => {
-            if (this.props.totalPage) {
-                return (
-                    <div style={{
-                        display: 'flex',
-                        width: '100%',
-                        justifyContent: 'center',
-                        margin: '10px 0'
-                    }}>
-                        <label for='page' style={{ marginRight: '10px' }}>Page</label>
-                        <select name="page" id="page" onChange={event => this.props.page(event.target.value)}>
-                            {this.createoptions(this.props.totalPage).map(opt => opt)}
-                        </select>
-                    </div>
-                )
-            }
+    let pagination = () => {
+        if (props.totalPage) {
+            return (
+                <div style={{
+                    display: 'flex',
+                    width: '100%',
+                    justifyContent: 'center',
+                    margin: '10px 0'
+                }}>
+                    <label for='page' style={{ marginRight: '10px' }}>Page</label>
+                    <select name="page" id="page" onChange={event => props.page(event.target.value)}>
+                        {createoptions(props.totalPage).map(opt => opt)}
+                    </select>
+                </div>
+            )
         }
-        return (<div>{pagination()}</div>)
-
     }
+    return (<div>{pagination()}</div>)
+
 }
+
 
 export default Pagination
