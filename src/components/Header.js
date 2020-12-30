@@ -9,7 +9,7 @@ function Header(props) {
             <div><h3>Search </h3><h3>Hacker News</h3></div>
             <div className="searchBox">
                 <div><img src="https://www.flaticon.com/svg/static/icons/svg/49/49116.svg" height="20px" alt=''></img></div>
-                <input type="text" placeholder='Search stories by title, url or author' onChange={event => (props.query(event.target.value))}></input>
+                <input type="text" placeholder='Search stories by title, url or author' onChange={event => (props.query('query', event.target.value))}></input>
             </div>
             <a href='./setting' style={{
                 marginLeft: 'auto',

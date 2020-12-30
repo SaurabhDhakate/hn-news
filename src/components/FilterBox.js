@@ -5,13 +5,13 @@ function FilterBox(props) {
     return (
         <div className='filter-box'>
             <label htmlFor='search'>Search</label>
-            <select name="search" id="search" onChange={event => props.tags(event.target.value)}>
+            <select name="search" id="search" onChange={event => props.tags('tags',event.target.value)}>
                 <option value="">All</option>
                 <option value="story">Stories</option>
                 <option value="comment">Comments</option>
             </select>
             <label htmlFor='by'> By</label>
-            <select name="by" id="by" onChange={event => props.sort(event.target.value)}>
+            <select name="by" id="by" onChange={event => props.sort('sort', event.target.value)}>
                 <option value="search">Popularity</option>
                 <option value="search_by_date">Date</option>
             </select>

@@ -18,7 +18,7 @@ function Pagination(props) {
                     margin: '10px 0'
                 }}>
                     <label htmlFor='page' style={{ marginRight: '10px' }}>Page</label>
-                    <select name="page" id="page" onChange={event => props.page(event.target.value)}>
+                    <select name="page" id="page" onChange={event => props.page('page', event.target.value)}>
                         {createoptions(props.totalPage).map(opt => opt)}
                     </select>
                 </div>

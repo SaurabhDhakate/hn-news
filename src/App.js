@@ -10,13 +10,11 @@ import './App.css';
 
 
 export class App extends Component {
+
   constructor(props) {
     super(props)
-    this.updateFilter = this.updateFilter.bind(this)
-    this.updateQuery = this.updateQuery.bind(this)
-    this.updateSort = this.updateSort.bind(this)
+    this.updateSearch = this.updateSearch.bind(this)
     this.updateRange = this.updateRange.bind(this)
-    this.updatePage = this.updatePage.bind(this)
     this.state = {
       news: [],
       nbHits: '',
@@ -29,29 +27,13 @@ export class App extends Component {
       totalPage: null,
       loading: false,
     }
+
+    this.timerId = undefined
   }
 
-  updateFilter(tags) {
+  updateSearch(key, value) {
     this.setState({
-      tags: tags,
-    }, () => { this.updateNews() })
-  }
-
-  updateQuery(query) {
-    this.setState({
-      query: query,
-    }, () => { this.updateNews() })
-  }
-
-  updateSort(sort) {
-    this.setState({
-      sort: sort
-    }, () => { this.updateNews() })
-  }
-
-  updatePage(page) {
-    this.setState({
-      page: page
+      [key]: value,
     }, () => { this.updateNews() })
   }
 
@@ -67,37 +49,46 @@ export class App extends Component {
     })
   }
 
-  updateNews() {
+  makeApiCall = () => {
+
     let sort = this.state.sort
     let query = this.state.query
     let tag = this.state.tags
     let range = this.state.range
     let page = this.state.page
-    this.setState({ loading: true }, () => {
-      axios.get(`https://hn.algolia.com/api/v1/${sort}?query=${query}&tags=${tag}&numericFilters=${range}&page=${page}`)
-        .then(response => {
-          this.setState({
-            news: response.data.hits,
-            nbHits: response.data.nbHits,
-            nbTime: response.data.processingTimeMS,
-            totalPage: response.data.nbPages,
-            loading: false
-          })
-        })
-        .catch((err) => {
-          console.log(err)
-          this.setState({
-            news: [],
-            totalPage: false,
-            loading: false
-          })
-        })
-    })
 
+    axios.get(`https://hn.algolia.com/api/v1/${sort}?query=${query}&tags=${tag}&numericFilters=${range}&page=${page}`)
+      .then(response => {
+        this.setState({
+          news: response.data.hits,
+          nbHits: response.data.nbHits,
+          nbTime: response.data.processingTimeMS,
+          totalPage: response.data.nbPages,
+          loading: false
+        })
+        console.log(query)
+      })
+      .catch(() => {
+        this.setState({
+          news: [],
+          totalPage: false,
+          loading: false
+        })
+      })
   }
-  componentDidMount() {
-    this.updateNews()
+
+  debouncerFunction(func, delay) {
+    clearTimeout(this.timerId)
+    this.timerId = setTimeout(func, delay)
   }
+
+  updateNews() {
+    this.setState({ loading: true }, () => {
+      this.debouncerFunction(this.makeApiCall, 200)
+    })
+  }
+
+  componentDidMount() { this.updateNews() }
 
   render() {
     return (
@@ -105,14 +96,14 @@ export class App extends Component {
 
         <Route path='/' exact>
           <div>
-            <Header query={this.updateQuery} />
-            <FilterBox tags={this.updateFilter}
-              sort={this.updateSort}
+            <Header query={this.updateSearch} />
+            <FilterBox tags={this.updateSearch}
+              sort={this.updateSearch}
               range={this.updateRange}
               nbHits={this.state.nbHits}
               nbTime={this.state.nbTime} />
             <NewsBox news={this.state.news} loading={this.state.loading} />
-            <Pagination page={this.updatePage} totalPage={this.state.totalPage} />
+            <Pagination page={this.updateSearch} totalPage={this.state.totalPage} />
           </div>
         </Route>
 
