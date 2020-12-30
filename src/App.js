@@ -66,7 +66,6 @@ export class App extends Component {
           totalPage: response.data.nbPages,
           loading: false
         })
-        console.log(query)
       })
       .catch(() => {
         this.setState({
