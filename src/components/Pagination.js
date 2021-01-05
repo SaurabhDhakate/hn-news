@@ -1,6 +1,9 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 function Pagination(props) {
+    let totalPage = useSelector(state => state.totalPage)
+    const dispatch = useDispatch()
     let createoptions = (n) => {
         let options = []
         for (let i = 0; i < n; i++) {
@@ -9,7 +12,7 @@ function Pagination(props) {
         return options
     }
     let pagination = () => {
-        if (props.totalPage) {
+        if (totalPage) {
             return (
                 <div style={{
                     display: 'flex',
@@ -18,8 +21,13 @@ function Pagination(props) {
                     margin: '10px 0'
                 }}>
                     <label htmlFor='page' style={{ marginRight: '10px' }}>Page</label>
-                    <select name="page" id="page" onChange={event => props.page('page', event.target.value)}>
-                        {createoptions(props.totalPage).map(opt => opt)}
+                    <select name="page" id="page" onChange={event => {
+                        dispatch({
+                            payload: event.target.value,
+                            type: 'update/page'
+                        })
+                    }}>
+                        {createoptions(totalPage).map(opt => opt)}
                     </select>
                 </div>
             )

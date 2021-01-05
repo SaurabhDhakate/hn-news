@@ -1,6 +1,8 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
-function Header(props) {
+function Header() {
+    const dispatch = useDispatch()
     return (
         <header className="header">
             <a href='./'>
@@ -9,7 +11,12 @@ function Header(props) {
             <div><h3>Search </h3><h3>Hacker News</h3></div>
             <div className="searchBox">
                 <div><img src="https://www.flaticon.com/svg/static/icons/svg/49/49116.svg" height="20px" alt=''></img></div>
-                <input type="text" placeholder='Search stories by title, url or author' onChange={event => (props.query('query', event.target.value))}></input>
+                <input type="text" placeholder='Search stories by title, url or author' onChange={event => {
+                    dispatch({
+                        payload: event.target.value,
+                        type: 'update/query'
+                    })
+                }}></input>
             </div>
             <a href='./setting' style={{
                 marginLeft: 'auto',
