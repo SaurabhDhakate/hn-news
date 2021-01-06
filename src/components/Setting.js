@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 export class Setting extends Component {
 
     constructor(props) {
@@ -13,12 +14,12 @@ export class Setting extends Component {
         return (
             <div>
                 <header className="header">
-                    <a href='./'>
+                    <Link to='./'>
                         <img src="https://hn.algolia.com/packs/media/images/logo-hn-search-a822432b.png" height="85%" alt='' ></img>
-                    </a>
+                    </Link>
                     <div><h3>Search </h3><h3>Hacker News</h3></div>
 
-                    <a href='./' style={{
+                    <Link to='./' style={{
                         marginLeft: 'auto',
                         textDecoration: 'none',
                         color: 'black',
@@ -27,7 +28,7 @@ export class Setting extends Component {
                         <div className='setting home' style={{ height: '100%' }}>
                             <img src='https://www.flaticon.com/svg/static/icons/svg/271/271220.svg' height='10px' alt='' ></img>
                         </div>
-                    </a>
+                    </Link>
                 </header>
                 <div>
                     <h3 style={{ marginLeft: '10px', marginTop:'10px'}}>Settings</h3>
