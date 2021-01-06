@@ -9,7 +9,7 @@ import Setting from './components/Setting'
 import './App.css'
 
 
-export class AppRedux extends Component {
+export class App extends Component {
 
     constructor() {
         super()
@@ -28,10 +28,11 @@ export class AppRedux extends Component {
             .then(response => response.json())
             .then(data => {
                 this.props.updateNews(data)
-            }).catch(()=>{
+            }).catch(() => {
                 this.props.updateNews({
-                    hits:[],
-                    processingTimeMS:null
+                    hits: [],
+                    processingTimeMS: null,
+                    nbHits:0
                 })
             })
     }
@@ -47,38 +48,33 @@ export class AppRedux extends Component {
 
     componentDidMount() { this.makeApiCall() }
 
-    shouldComponentUpdate(nextProps) {
+   
+    componentDidUpdate(prevProps) {
 
         let oldSearchParams = `${this.props.state.sort + this.props.state.tags + this.props.state.range + this.props.state.query + this.props.state.page}`
-        let newSearchParams = `${nextProps.state.sort + nextProps.state.tags + nextProps.state.range + nextProps.state.query + nextProps.state.page}`
+        let newSearchParams = `${prevProps.state.sort + prevProps.state.tags + prevProps.state.range + prevProps.state.query + prevProps.state.page}`
 
-        if (oldSearchParams === newSearchParams) {
-            return false
-        }
-        else {
-            return true
+        if (oldSearchParams !== newSearchParams) {
+            this.updateNews()
         }
     }
-    componentDidUpdate() { this.updateNews() }
 
     render() {
         return (
-            <div>
-                <BrowserRouter>
+            <BrowserRouter>
 
-                    <Route path='/' exact>
-                        <Header />
-                        <FilterBox />
-                        <NewsBox />
-                        <Pagination />
-                    </Route>
+                <Route path='/' exact>
+                    <Header />
+                    <FilterBox />
+                    <NewsBox />
+                    <Pagination />
+                </Route>
 
-                    <Route path='/setting' exact>
-                        <Setting />
-                    </Route>
+                <Route path='/setting' exact>
+                    <Setting />
+                </Route>
 
-                </BrowserRouter>
-            </div>
+            </BrowserRouter>
         )
     }
 }
@@ -120,4 +116,4 @@ const mapDispatchToProps = dispatch => {
     })
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppRedux)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
